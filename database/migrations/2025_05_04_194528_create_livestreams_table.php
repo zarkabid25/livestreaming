@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->text('description');
-            $table->text('embed_url'); // YouTube or Vimeo embed link
+            $table->text('embed_url');
             $table->enum('status', ['active', 'inactive'])->default('inactive');
             $table->timestamps();
         });
