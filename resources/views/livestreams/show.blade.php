@@ -6,7 +6,7 @@
     <p>{{ $livestream->description }}</p>
 
     <div class="embed-responsive embed-responsive-16by9 mb-3">
-        <iframe class="embed-responsive-item" src="{{ $livestream->embed_url }}" allowfullscreen></iframe>
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ $livestream->embed_url }}" allowfullscreen></iframe>
     </div>
 
     @auth

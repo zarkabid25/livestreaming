@@ -21,17 +21,25 @@ class LivestreamController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'title' => 'required',
             'description' => 'required',
             'embed_url' => 'required|url',
         ]);
 
+        preg_match('/(?:youtube\.com\/(?:live|watch)\?v=|youtube\.com\/live\/|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $request->embed_url, $matches);
+        $videoId = $matches[1] ?? null;
+
+        if (!$videoId) {
+            return back()->with('error', 'Invalid YouTube link');
+        }
+
         Livestream::create([
             'user_id' => Auth::id(),
             'title' => $request->title,
             'description' => $request->description,
-            'embed_url' => $request->embed_url,
+            'embed_url' => $videoId,
             'status' => 'active',
         ]);
 
